@@ -1,0 +1,21 @@
+<launch>
+
+<node pkg="tf" type="static_transform_publisher" name="link0_br" 
+      args="0.5 0.5 0 0 0 0 map link_0 100" />
+
+<node pkg="dh2tf" type="dh2tf" name="dh2tf_link1">
+    <param name="tf_begin" value="link_0"/>
+	<param name="tf_end"   value="link_1"/>  
+	<remap from="dh" to="dh_link1" />
+</node>
+
+<node pkg="dh2tf" type="dh2tf" name="dh2tf_link2">
+    <param name="tf_begin" value="link_1"/>
+	<param name="tf_end"   value="link_2"/>  
+	<remap from="dh" to="dh_link2" />
+</node>
+
+<node pkg="rviz" type="rviz" name="rviz" 
+      args="-f map -d $(dirname)/../rviz/config.rviz"/>
+
+</launch>
